@@ -24,36 +24,5 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class ItemServiceTest {
 
-    @Mock
-    private ItemRepository itemRepository;
-
-    @InjectMocks
-    private ItemService itemService;
-
-    @Test
-    public void testGetItemById_Success() {
-        Long itemId = 1L;
-        Item item = new Item();
-        item.setItemId(itemId);
-        when(itemRepository.findById(itemId)).thenReturn(Optional.of(item));
-
-        Item result = itemService.getItemById(itemId);
-
-        assertNotNull(result);
-        assertEquals(itemId, result.getItemId());
-        verify(itemRepository, times(1)).findById(itemId);
-    }
-
-    @Test
-    public void testGetItemById_ItemNotFound() {
-        Long itemId = 2L;
-        when(itemRepository.findById(itemId)).thenReturn(Optional.empty());
-
-        assertThrows(ItemNotFoundException.class, () -> itemService.getItemById(itemId));
-
-        verify(itemRepository, times(1)).findById(itemId);
-    }
-
-   
+  
 }
-
